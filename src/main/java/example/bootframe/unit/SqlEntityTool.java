@@ -18,50 +18,75 @@ import java.util.*;
 public class SqlEntityTool {
     private final static File FILE = new File("src/main/resources/mybatis/generatorConfig.xml");
 
-    public static void getTableMap(List<Map> list) throws Exception {
+    /**
+     * @param list  查询数据库的结果集
+     * @param index 需要进行的操作 0:不操作,1:删掉第一个下划线左边,2:删掉最后一个下划线右边,3:删掉第一个和最后一个下划线的两边
+     * @throws Exception
+     */
+    public static void getTableMap(List<Map> list, int index) throws Exception {
         Map<String, String> map = new TreeMap<>();
         for (Map m : list) {
             String key = m.get("table_name") + "";
-            String value = key.substring(0, key.lastIndexOf("_"));
+            String value = key;
+            //名称裁剪
+            if (index == 1) {
+                value = value.substring(value.indexOf("_") + 1);
+            }
+            if (index == 2) {
+                value = value.substring(0, value.lastIndexOf("_"));
+            }
+            if (index == 3) {
+                value = value.substring(value.indexOf("_") + 1, value.lastIndexOf("_"));
+            }
+            //首字母大写
             value = value.substring(0, 1).toUpperCase() + value.substring(1);
-            value = getStr(value);
+            //驼峰命名
+            if (value.indexOf("_") > 0) {
+                value = getStr(value);
+            }
             map.put(key, value);
         }
-        map = sortMapByKey(map);
+
         xmlToString(map);
     }
 
+//    /**
+//     * 使用 Map按key进行排序
+//     *
+//     * @param map
+//     * @return
+//     */
+//    public static Map<String, String> sortMapByKey(Map<String, String> map) {
+//        if (map == null || map.isEmpty()) {
+//            return null;
+//        }
+//
+//        Map<String, String> sortMap = new TreeMap<String, String>(
+//                new MapKeyComparator());
+//
+//        sortMap.putAll(map);
+//
+//        return sortMap;
+//    }
+//
+//    /**
+//     * 比较器类
+//     */
+//    static class MapKeyComparator implements Comparator<String> {
+//
+//        @Override
+//        public int compare(String str1, String str2) {
+//
+//            return str1.compareTo(str2);
+//        }
+//    }
+
     /**
-     * 使用 Map按key进行排序
+     * 驼峰命名
      *
-     * @param map
+     * @param value
      * @return
      */
-    public static Map<String, String> sortMapByKey(Map<String, String> map) {
-        if (map == null || map.isEmpty()) {
-            return null;
-        }
-
-        Map<String, String> sortMap = new TreeMap<String, String>(
-                new MapKeyComparator());
-
-        sortMap.putAll(map);
-
-        return sortMap;
-    }
-
-    /**
-     * 比较器类
-     */
-    static class MapKeyComparator implements Comparator<String> {
-
-        @Override
-        public int compare(String str1, String str2) {
-
-            return str1.compareTo(str2);
-        }
-    }
-
     private static String getStr(String value) {
         if (value.contains("_")) {
             int i = value.indexOf("_");
@@ -102,14 +127,20 @@ public class SqlEntityTool {
             //否则写入文件,并且修改路径
             if (nowPackage.equals("." + packageName)) {
                 addTable(ele, key, map);
-                i++;
             } else {
                 if (i != 1) {
                     writeXML(document, nowPackage);
                     delTable(ele);
                 }
-                modifyUrl(entity, entitya, mapperre, mapperrea, mapperja, mapperjaa, packageName, ele, key, map);
+                entity.addAttribute("targetPackage", stitchingPath(entitya, packageName));
+                mapperre.addAttribute("targetPackage", stitchingPath(mapperrea, packageName));
+                mapperja.addAttribute("targetPackage", stitchingPath(mapperjaa, packageName));
+                addTable(ele, key, map);
             }
+            if (i == map.size()) {
+                writeXML(document, nowPackage);
+            }
+            i++;
         }
     }
 
@@ -182,6 +213,11 @@ public class SqlEntityTool {
     }
 
 
+    /**
+     * 根据xml生成文件
+     *
+     * @throws Exception
+     */
     public static void generator() throws Exception {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;

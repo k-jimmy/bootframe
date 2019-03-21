@@ -1,6 +1,5 @@
 package example.bootframe;
 
-import example.bootframe.mapper.TableMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,9 +11,6 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class BootframeApplicationTests {
 
-    @Resource
-    TableMapper tableMapper;
-    @Test
     public void contextLoads() {
 
     }
