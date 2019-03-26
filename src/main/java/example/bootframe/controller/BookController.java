@@ -4,13 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import example.bootframe.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class BookController {
@@ -34,11 +32,12 @@ public class BookController {
     @ResponseBody
     @RequestMapping("/getContent")
     public JSONObject getContent(String url) {
-        return bookService.searchBook(url,"content");
+        return bookService.getContent(url,"content");
     }
 
     @RequestMapping("/catalog")
-    public String list(String url,Model model) {
+    public String list(HttpServletRequest request,Model model) {
+        String url = request.getParameter("url");
         JSONObject str =bookService.getCatalog(url,"listmain");
         model.addAttribute("catalog", str);
         return "catalog";
