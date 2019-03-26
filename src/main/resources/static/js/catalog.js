@@ -1,5 +1,6 @@
 function Catalog() {
     // var base = this;
+    console.log("123");
     this.initCatalog();
     setTimeout(function () {
         $("head").append($(" <link href='css/catalog.css' rel='stylesheet'/>"));

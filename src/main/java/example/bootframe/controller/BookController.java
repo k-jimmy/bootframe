@@ -38,6 +38,7 @@ public class BookController {
     @RequestMapping("/catalog")
     public String list(HttpServletRequest request,Model model) {
         String url = request.getParameter("url");
+        System.out.println(url);
         JSONObject str =bookService.getCatalog(url,"listmain");
         model.addAttribute("catalog", str);
         return "catalog";

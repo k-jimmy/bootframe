@@ -21,12 +21,12 @@ function Index() {
         });
         $(this).addClass("active");
     });
-    $(".container").on("click", " h4", function() {
+    $(".container").on("click", " h4", function () {
         base.toCatalog(this);
     })
-    $(".container").on("click", " span", function() {
-        base.newContent(this);
-    })
+    // $(".container").on("click", " span", function () {
+    //     base.newContent(this);
+    // })
 }
 
 Index.prototype = {
@@ -73,18 +73,18 @@ Index.prototype = {
     },
 
     toCatalog: function (index) {
-        var data = {};
-        data.url = $(index).attr("data-url");
-        $.get("/getCatalog", data, function (r) {
-
-        });
+        console.log("---");
+        var w=$(".container .row");
+        var url = $(index).attr("data-url");
+        w.empty();
+        w.load("/catalog/?url=" + url);
     },
     newContent: function (index) {
         var data = {};
         data.url = $(index).attr("data-url");
-        $.get("/getContent", data, function (r) {
-
-        });
+        // $.get("/getContent", data, function (r) {
+        //
+        // });
     },
 
 };
