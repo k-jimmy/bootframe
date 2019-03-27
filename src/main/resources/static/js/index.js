@@ -24,9 +24,10 @@ function Index() {
     $(".container").on("click", " h4", function () {
         base.toCatalog(this);
     })
-    // $(".container").on("click", " span", function () {
-    //     base.newContent(this);
-    // })
+    $(".container").on("click", " span", function () {
+        console.log("------");
+        base.newContent(this);
+    })
 }
 
 Index.prototype = {
@@ -34,7 +35,7 @@ Index.prototype = {
         var data = {};
         data.url = "http://localhost:8080/v1/" + category + "/" + value + "/10";
         $.get("/searchBook", data, function (r) {
-            console.log(r);
+            // console.log(r);
             if (r.info) {
                 $(".container #searchList div").empty();
                 Object.keys(r.info).forEach(function (key) {
@@ -73,11 +74,11 @@ Index.prototype = {
     },
 
     toCatalog: function (index) {
-        console.log("---");
-        var w=$(".container .row");
+        var w = $(".container .row");
         var url = $(index).attr("data-url");
         w.empty();
-        w.load("/catalog/?url=" + url);
+        w.load("/getCatalog/?url=" + url);
+        $("head").append($("<script type=\"text/javascript\" src=\"js/catalog.js\"></script>"));
     },
     newContent: function (index) {
         var data = {};

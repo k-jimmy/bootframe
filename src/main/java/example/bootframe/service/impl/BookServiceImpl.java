@@ -33,10 +33,19 @@ public class BookServiceImpl implements BookService {
     //获得目录
     @Override
     public JSONObject getCatalog(String url, String attr) {
+//        String bookName= getHttpContent(url,"book .info");
         String result = getHttpContent(url);
-        result = jsoupXML(result, "listmain");
+        String bookImg = jsoupXML(result, "book .info .cover");
+        String bookName = jsoupXML(result, "book .info h1");
+        String bookSmall = jsoupXML(result, "book .info .small");
+        String bookIntro = jsoupXML(result, "book .info .intro");
+        String catalog = jsoupXML(result, "listmain");
         Map<String, Object> map = new HashMap<>();
-        map.put("catalog", result);
+        map.put("bookImg", bookImg);
+        map.put("bookName", bookName);
+        map.put("bookSmall", bookSmall);
+        map.put("bookIntro", bookIntro);
+        map.put("catalog", catalog);
         return new JSONObject(map);
     }
 
@@ -46,7 +55,7 @@ public class BookServiceImpl implements BookService {
         String result = getHttpContent(url);
         String title = jsoupXML(result, attr + " h1");
         String content = jsoupXML(result, attr + " .showtxt");
-        content = content.replace("<br>", "");
+//        content = content.replace("<br>", "");
         String pre = jsoupXML(result, attr + " .page_chapter li:eq(0)");
         String next = jsoupXML(result, attr + " .page_chapter li:eq(2)");
         Map<String, Object> map = new HashMap<>();

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BookController {
     @Resource
     private BookService bookService;
+
     @RequestMapping("/")
     public String index() {
         return "index";
@@ -22,25 +23,28 @@ public class BookController {
     @ResponseBody
     @RequestMapping("/searchBook")
     public JSONObject searchBook(String url) {
-        return bookService.searchBook(url,"");
-    }
-    @ResponseBody
-    @RequestMapping("/getCatalog")
-    public JSONObject getCatalog(String url) {
-        return bookService.getCatalog(url,"listmain");
-    }
-    @ResponseBody
-    @RequestMapping("/getContent")
-    public JSONObject getContent(String url) {
-        return bookService.getContent(url,"content");
+        return bookService.searchBook(url, "");
     }
 
-    @RequestMapping("/catalog")
-    public String list(HttpServletRequest request,Model model) {
+//    @ResponseBody
+//    @RequestMapping("/getContent")
+//    public JSONObject getContent(String url) {
+//        return bookService.getContent(url, "content");
+//    }
+
+    @RequestMapping("/getCatalog")
+    public String getCatalog(HttpServletRequest request, Model model) {
         String url = request.getParameter("url");
-        System.out.println(url);
-        JSONObject str =bookService.getCatalog(url,"listmain");
+        JSONObject str = bookService.getCatalog(url, "listmain");
         model.addAttribute("catalog", str);
         return "catalog";
+    }
+
+    @RequestMapping("/getContent")
+    public String getContent(HttpServletRequest request, Model model) {
+        String url = request.getParameter("url");
+        JSONObject str = bookService.getContent(url, "content");
+        model.addAttribute("content", str);
+        return "content";
     }
 }

@@ -1,6 +1,16 @@
 <!--<html xmlns:th="http://www.thymeleaf.org">-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-<script type="text/javascript" src="js/catalog.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="js/catalog.js"></script>-->
+<div class="book">
+    <div class="info">
+        <div class="cover" th:utext="${catalog.bookImg}"></div>
+        <div class="cover_right">
+            <h1 class="bookName" th:utext="${catalog.bookName}"></h1>
+            <div class="small" th:utext="${catalog.bookSmall}"></div>
+            <div class="intro" th:utext="${catalog.bookIntro}"></div>
+        </div>
+    </div>
+</div>
 <div class="listmain" th:utext="${catalog.catalog}">
 </div>
-</html>
+<!--</html>-->
