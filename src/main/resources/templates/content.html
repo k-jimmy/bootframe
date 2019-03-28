@@ -12,21 +12,15 @@
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 
-    <!--<script type="text/javascript" src="js/content.js"></script>-->
+    <script type="text/javascript" src="js/content.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
-        <!--<div class="navbar-header">-->
-            <!--<a class="navbar-brand" href="#">菜鸟教程</a>-->
-        <!--</div>-->
         <div>
-            <!--<form class="search" role="search">-->
-                <div class="search">
-                    <input type="text" class="search-input" placeholder="搜索...">
-                </div>
-                <!--<button type="submit" class="btn btn-default">提交按钮</button>-->
-            <!--</form>-->
+            <div class="search">
+                <input type="text" class="search-input" placeholder="搜索...">
+            </div>
             <button type="button" class="btn btn-danger navbar-btn">
                 登陆
             </button>
@@ -36,15 +30,36 @@
 <!--内容区域-->
 <div class="container">
     <div class="row">
-        <div class="content-title" >
+        <div class="content-title">
             <h2 class="title" th:text="${content.title}"></h2>
         </div>
-        <div class="content-book" th:utext="${content.content}"></div>
-        <div class="content-pre" th:utext="${content.pre}+${content.next}" >
-            <!--<a class="btn btn-default"></a>-->
-            <!--<a class="btn btn-default"></a>-->
+        <div class="left-sidebar">
+            <div class="left-catalog">
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                <div>目录</div>
+            </div>
+            <div class="left-shelf">
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                <div>书架</div>
+            </div>
+            <div class="left-config">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                <div>设置</div>
+            </div>
         </div>
-        <!--<div class="content-next" th:utext="${content.next}"></div>-->
+        <div class="content-book" th:utext="${content.content}"></div>
+        <div class="content-pre">
+            <span class="move-up" th:data-url="${content.pre}">上一章</span>
+            <span class="move-up" th:data-url="${content.next}">下一章</span>
+        </div>
+        <div class="content-move">
+            <div class="move-up">
+                <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+            </div>
+            <div class="move-down">
+                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+            </div>
+        </div>
     </div>
 </div>
 </body>

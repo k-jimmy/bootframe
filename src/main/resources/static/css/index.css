@@ -11,7 +11,14 @@
     display: inline-block;
     padding: 0px 8px;
 }
+/*#searchList h4,#searchList span {*/
+    /*cursor: pointer;*/
+/*}*/
 H4{
     display: inline-block;
     padding-right: 10px;
+    cursor: pointer;
 }
+/*.text-primary{*/
+    /*cursor: pointer;*/
+/*}*/

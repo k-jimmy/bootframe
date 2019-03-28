@@ -1,10 +1,12 @@
 package example.bootframe.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import example.bootframe.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -16,7 +18,9 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(HttpServletRequest request, Model model) {
+        String bookName = request.getParameter("bookName");
+        model.addAttribute("book", bookName);
         return "index";
     }
 
@@ -26,11 +30,11 @@ public class BookController {
         return bookService.searchBook(url, "");
     }
 
-//    @ResponseBody
-//    @RequestMapping("/getContent")
-//    public JSONObject getContent(String url) {
-//        return bookService.getContent(url, "content");
-//    }
+    @ResponseBody
+    @RequestMapping(value="/getContent",method = {RequestMethod.POST})
+    public JSONObject getContent(String url) {
+        return bookService.getContent(url, "content");
+    }
 
     @RequestMapping("/getCatalog")
     public String getCatalog(HttpServletRequest request, Model model) {
@@ -40,9 +44,13 @@ public class BookController {
         return "catalog";
     }
 
-    @RequestMapping("/getContent")
+    @RequestMapping(value="/getContent",method={RequestMethod.GET})
     public String getContent(HttpServletRequest request, Model model) {
         String url = request.getParameter("url");
+        System.out.println(url);
+        if ("".equals(url) || url == null) {
+            return "/getContent";
+        }
         JSONObject str = bookService.getContent(url, "content");
         model.addAttribute("content", str);
         return "content";

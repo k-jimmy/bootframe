@@ -35,11 +35,11 @@ public class BookServiceImpl implements BookService {
     public JSONObject getCatalog(String url, String attr) {
 //        String bookName= getHttpContent(url,"book .info");
         String result = getHttpContent(url);
-        String bookImg = jsoupXML(result, "book .info .cover");
-        String bookName = jsoupXML(result, "book .info h1");
-        String bookSmall = jsoupXML(result, "book .info .small");
-        String bookIntro = jsoupXML(result, "book .info .intro");
-        String catalog = jsoupXML(result, "listmain");
+        String bookImg = jsoupXML(result, "book .info .cover").html();
+        String bookName = jsoupXML(result, "book .info h1").html();
+        String bookSmall = jsoupXML(result, "book .info .small").html();
+        String bookIntro = jsoupXML(result, "book .info .intro").html();
+        String catalog = jsoupXML(result, "listmain").html();
         Map<String, Object> map = new HashMap<>();
         map.put("bookImg", bookImg);
         map.put("bookName", bookName);
@@ -53,11 +53,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public JSONObject getContent(String url, String attr) {
         String result = getHttpContent(url);
-        String title = jsoupXML(result, attr + " h1");
-        String content = jsoupXML(result, attr + " .showtxt");
-//        content = content.replace("<br>", "");
-        String pre = jsoupXML(result, attr + " .page_chapter li:eq(0)");
-        String next = jsoupXML(result, attr + " .page_chapter li:eq(2)");
+        String title = jsoupXML(result, attr + " h1").html();
+        String content = jsoupXML(result, attr + " .showtxt").html();
+        String pre = jsoupXML(result, attr + " .page_chapter li:eq(0) a").attr("href");
+        String next = jsoupXML(result, attr + " .page_chapter li:eq(2) a").attr("href");
         Map<String, Object> map = new HashMap<>();
         map.put("title", title);
         map.put("content", content);
@@ -67,12 +66,12 @@ public class BookServiceImpl implements BookService {
     }
 
     //获取html指定内容,解析html
-    private String jsoupXML(String content, String attr) {
+    private Element jsoupXML(String content, String attr) {
         Document doc = Jsoup.parse(content); // 解析网页 得到文档对象
         Elements elements = doc.select("." + attr);//需获得的标签及以下内容
         Element element = elements.get(0); // 获取第1个元素
-        String result = element.html(); // 返回元素的文本
-        return result;
+//        String result = element.html(); // 返回元素的文本
+        return element;
     }
 
 

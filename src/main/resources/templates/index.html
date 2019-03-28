@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,12 +23,8 @@
     <div class="row">
         <div class="col-sm-2 col-md-2"></div>
         <div id="content" class="col-sm-8 col-md-8">
-            <!--<ul class="nav nav-pills">-->
-                <!--<li class="active" data-val="novels"><a href="#">书名</a></li>-->
-                <!--<li class="" data-val="author"><a href="#">作者</a></li>-->
-            <!--</ul>-->
             <div class="input-group">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" th:value="${book}">
                 <span class="input-group-btn">
                         <button class="btn btn-danger" type="button">搜索</button>
                     </span>

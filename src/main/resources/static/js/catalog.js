@@ -1,10 +1,15 @@
 function Catalog() {
     // var base = this;
-    console.log("123");
     // this.initCatalog();
     setTimeout(function () {
+        //延迟加载css文件
         $("head").append($(" <link href='css/catalog.css' rel='stylesheet'/>"));
+        //延迟绑定a标签的松开鼠标的动作
+        $(".container a").mouseup(function () {
+            $(this).attr("href", "/getContent?url=" + $(this).attr("href"));
+        });
     }, 1);
+
 }
 
 Catalog.prototype = {
@@ -16,11 +21,6 @@ Catalog.prototype = {
 
         });
     },
-    // loadCss: function () {
-    //     console.log("----");
-    //     // $("head").append($("<link rel='stylesheet' href='"+src+"' type='text/css' media='screen' />"));
-    //     $("head").append($(" <link href='css/catalog.css' rel='stylesheet'/>"));
-    // }
 
 };
 $(function () {

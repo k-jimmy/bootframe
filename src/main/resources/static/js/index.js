@@ -1,5 +1,11 @@
 function Index() {
     var base = this;
+    setTimeout(function () {
+        var book = $(".container .form-control").val();
+        if (book) {
+            $(".container .btn-danger").click();
+        }
+    }, 1);
     $(".container .btn-primary").hide();
     //绑定回车
     $(document).keydown(function (event) {
@@ -21,13 +27,6 @@ function Index() {
         });
         $(this).addClass("active");
     });
-    $(".container").on("click", " h4", function () {
-        base.toCatalog(this);
-    })
-    $(".container").on("click", " span", function () {
-        console.log("------");
-        base.newContent(this);
-    })
 }
 
 Index.prototype = {
@@ -52,10 +51,10 @@ Index.prototype = {
                             "                <div class=\"col-sm-10 col-md-10\">\n" +
                             "                    <div class=\"thumbnail\">\n" +
                             "                        <div class=\"caption\">\n" +
-                            "                            <h4 class=\"text-primary\" data-url='https://www.bqg99.cc/book/2639610/'>" + book.novel_name + "</h4>" +
+                            "                            <a href='/getCatalog?url=" + book.novel_url + "'><h4 class=\"text-primary\" >" + book.novel_name + "</h4></a>" +
                             "                               <span><small> " + book.novel_author + "</small></span>" +
                             "                               <span><small> " + book.novel_type + "</small></span>" +
-                            "                               <span class=\"text-primary\" data-url='https://www.bqg99.cc/book/2639610/554231232.html'><small>最新章节：" + book.novel_latest_chapter_name + "</small></span>\n" +
+                            "                             <a href='/getContent?url=" + book.novel_latest_chapter_url + "'>  <span class=\"text-primary\"><small>最新章节：" + book.novel_latest_chapter_name + "</small></span></a>\n" +
                             "                            <p><small>引言：" + book.novel_abstract + "</small></p>\n" +
                             "                        </div>\n" +
                             "                    </div>\n" +
@@ -71,22 +70,7 @@ Index.prototype = {
                 $(".container .btn-primary").click();
             }
         });
-    },
-
-    toCatalog: function (index) {
-        var w = $(".container .row");
-        var url = $(index).attr("data-url");
-        w.empty();
-        w.load("/getCatalog/?url=" + url);
-        $("head").append($("<script type=\"text/javascript\" src=\"js/catalog.js\"></script>"));
-    },
-    newContent: function (index) {
-        var data = {};
-        data.url = $(index).attr("data-url");
-        // $.get("/getContent", data, function (r) {
-        //
-        // });
-    },
+    }
 
 };
 $(function () {
