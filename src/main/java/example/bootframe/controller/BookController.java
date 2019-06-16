@@ -21,7 +21,7 @@ public class BookController {
     public String index(HttpServletRequest request, Model model) {
         String bookName = request.getParameter("bookName");
         model.addAttribute("book", bookName);
-        return "index";
+        return "bookShelf";
     }
 
     @ResponseBody

@@ -1,0 +1,78 @@
+.container .tittle {
+    background-color: #337ab7;
+    color: #ffffff;
+    height: 60px;
+}
+
+.container .label {
+    padding-bottom: .2em;
+}
+
+.container .tittle div {
+    text-align: center;
+}
+
+.container .tittle .middleSide {
+    /*text-align: center;*/
+}
+
+.container .tittle span {
+    /*font-size: 1.5em;*/
+    /*display: inline-block;*/
+    /*margin-top: 5px;*/
+}
+
+.container .book {
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.container .book > div {
+    margin: 10px auto 10px;
+}
+
+.container .book img {
+    width: 50px;
+    height: 60px;
+}
+
+.container .book .bookName, .container .book .star {
+    margin-left: -15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.container .book .star {
+    color: #BBBBBB;
+    font-size: 0.8em;
+}
+.container .addBook {
+    border-bottom: 1px solid #EEEEEE;
+    height: 40px;
+    line-height: 40px;
+    background-color: #EEEEEE;
+}
+.container .addBook span:first-child {
+    font-size: 1.5em;
+    color: #337ab7;
+    top: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+.container .addBook span:last-child {
+font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
