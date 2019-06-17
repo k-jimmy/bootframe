@@ -1,7 +1,11 @@
+.container {
+    z-index: 999;
+}
+
 .container .tittle {
     background-color: #337ab7;
     color: #ffffff;
-    height: 60px;
+    height: 50px;
 }
 
 .container .label {
@@ -12,14 +16,8 @@
     text-align: center;
 }
 
-.container .tittle .middleSide {
-    /*text-align: center;*/
-}
-
-.container .tittle span {
-    /*font-size: 1.5em;*/
-    /*display: inline-block;*/
-    /*margin-top: 5px;*/
+.container .tittle .middleSide h4 {
+    line-height: 30px;
 }
 
 .container .book {
@@ -45,12 +43,14 @@
     color: #BBBBBB;
     font-size: 0.8em;
 }
+
 .container .addBook {
     border-bottom: 1px solid #EEEEEE;
     height: 40px;
     line-height: 40px;
     background-color: #EEEEEE;
 }
+
 .container .addBook span:first-child {
     font-size: 1.5em;
     color: #337ab7;
@@ -60,7 +60,24 @@
 }
 
 .container .addBook span:last-child {
-font-weight: 600;
+    font-weight: 600;
+}
+#sidebar-wrapper ul {
+    margin-top: 50px;
+}
+#sidebar-wrapper ul li{
+    border-bottom: 1px solid #0f0f0f;
+}
+#sidebar-wrapper ul li span{
+    color: #dddddd;
+    display: block;
+    padding: 8px 15px 8px 30px;
+    text-decoration: none;
+}
+#sidebar-wrapper ul li span i{
+    width: 24px;
+    height: 24px;
+    background-color: #d9534f;
 }
 
 

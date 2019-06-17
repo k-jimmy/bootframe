@@ -28,38 +28,52 @@ function BookShelf() {
     //     $(this).addClass("active");
     // });
     // $(document).ready(function () {
-        var trigger = $('.hamburger'),
-            overlay = $('.overlay'),
+    var trigger = $('.hamburger'),
+        overlay = $('.overlay'),
+        isClosed = false;
+
+    trigger.click(function () {
+        hamburger_cross();
+    });
+
+    function hamburger_cross() {
+
+        if (isClosed == true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
             isClosed = false;
-
-        trigger.click(function () {
-            hamburger_cross();
-        });
-
-        function hamburger_cross() {
-
-            if (isClosed == true) {
-                overlay.hide();
-                trigger.removeClass('is-open');
-                trigger.addClass('is-closed');
-                isClosed = false;
-            } else {
-                overlay.show();
-                trigger.removeClass('is-closed');
-                trigger.addClass('is-open');
-                isClosed = true;
-            }
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
         }
+    }
 
-        $('[data-toggle="offcanvas"]').click(function () {
-            $('#wrapper').toggleClass('toggled');
-        });
+    // $('[data-toggle="offcanvas"]').click(function () {
+    //     $('#wrapper').toggleClass('toggled');
     // });
+    $('.container').click(function () {
+        console.log($("#wrapper .overlay").css("display"));
+        var dis = $("#wrapper .overlay").css("display");
+        if (dis === "block") {
+            console.log("add");
+            $('#wrapper').addClass("toggled");
+            // $('#wrapper').toggleClass('toggled');
+        }else{
+            $('#wrapper').removeClass("toggled");
+            console.log("remove");
+        }
+        // if ($('#wrapper [data-toggle="offcanvas"]').attr("class")) {
+        //     $('#wrapper').removeClass('toggled');
+        // }else{
+        //     $('#wrapper').removeClass('toggled');
+        // }
+    });
 }
 
-BookShelf.prototype = {
-
-};
+BookShelf.prototype = {};
 $(function () {
     new BookShelf();
 });
