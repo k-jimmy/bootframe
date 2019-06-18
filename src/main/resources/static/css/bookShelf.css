@@ -1,27 +1,7 @@
-.container {
-    z-index: 999;
-}
-
-.container .tittle {
-    background-color: #337ab7;
-    color: #ffffff;
-    height: 50px;
-}
-
-.container .label {
-    padding-bottom: .2em;
-}
-
-.container .tittle div {
-    text-align: center;
-}
-
-.container .tittle .middleSide h4 {
-    line-height: 30px;
-}
 
 .container .book {
     border-bottom: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
 }
 
 .container .book > div {
@@ -48,7 +28,7 @@
     border-bottom: 1px solid #EEEEEE;
     height: 40px;
     line-height: 40px;
-    background-color: #EEEEEE;
+    background-color: #FFFFFF;
 }
 
 .container .addBook span:first-child {
@@ -61,22 +41,6 @@
 
 .container .addBook span:last-child {
     font-weight: 600;
-}
-#sidebar-wrapper ul {
-    margin-top: 50px;
-}
-#sidebar-wrapper ul li{
-    border-bottom: 1px solid #0f0f0f;
-}
-#sidebar-wrapper ul li span{
-    color: #dddddd;
-    display: block;
-    padding: 8px 15px 8px 30px;
-    text-decoration: none;
-}
-#sidebar-wrapper ul li span i {
-    padding: 5px;
-    background-color: #d9534f;
 }
 
 

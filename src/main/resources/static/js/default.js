@@ -1,28 +1,31 @@
 function BookShelf() {
     var base = this;
-    // $("#wrapper li").click(function () {
-    //     var cla = $(this).attr("class");
-    //     eval("base." + cla + "()");
-    // });
-    // $("#wrapper .container .book .content").click(function () {
-    //
-    // });
-    $(".container .loadContent").load("bookShelf");
+    //加载书架
+    this.loadHtml("bookShelf");
 
+    //绑定侧边栏的选项事件
+    $("#wrapper li").click(function () {
+        var cla = $(this).attr("class");
+        eval("base." + cla + "("+cla+")");
+    });
 
-
-
-
+    //加载侧边栏,绑定侧边栏打开关闭事件
     var trigger = $('.hamburger'),
         overlay = $('.overlay'),
         isClosed = false;
 
     trigger.click(function () {
-        hamburger_cross();
+        isClosed = base.hamburger_cross(trigger, overlay, isClosed);
     });
 
-    function hamburger_cross() {
-        if (isClosed == true) {
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
+}
+
+BookShelf.prototype = {
+    hamburger_cross: function (trigger, overlay, isClosed) {
+        if (isClosed) {
             overlay.hide();
             trigger.removeClass('is-open');
             trigger.addClass('is-closed');
@@ -33,31 +36,28 @@ function BookShelf() {
             trigger.addClass('is-open');
             isClosed = true;
         }
-    }
+        return isClosed;
+    },
+    user: function (name) {
+        console.log(name);
+    },
+    bookShelf: function (name) {
+        console.log(name);
+    },
+    search: function (name) {
 
-    $('[data-toggle="offcanvas"]').click(function () {
-        $('#wrapper').toggleClass('toggled');
-    });
-}
+    },
+    signal: function (name) {
 
-BookShelf.prototype = {
-    user: function () {
-        console.log("user");
     },
-    bookShelf:function () {
-        console.log("bookShelf");
+    config: function (name) {
+
     },
-    search:function () {
-        
+    content: function () {
+
     },
-    signal:function () {
-        
-    },
-    config:function () {
-        
-    },
-    content:function () {
-        
+    loadHtml: function (html) {
+        $(".container .loadContent").load(html);
     }
 };
 $(function () {
