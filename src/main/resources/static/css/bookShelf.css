@@ -74,9 +74,8 @@
     padding: 8px 15px 8px 30px;
     text-decoration: none;
 }
-#sidebar-wrapper ul li span i{
-    width: 24px;
-    height: 24px;
+#sidebar-wrapper ul li span i {
+    padding: 5px;
     background-color: #d9534f;
 }
 

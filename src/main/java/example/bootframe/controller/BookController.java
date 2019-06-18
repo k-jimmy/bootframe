@@ -21,6 +21,12 @@ public class BookController {
     public String index(HttpServletRequest request, Model model) {
         String bookName = request.getParameter("bookName");
         model.addAttribute("book", bookName);
+        return "default";
+    }
+    @RequestMapping("/bookShelf")
+    public String bookShelf(HttpServletRequest request, Model model) {
+        String bookName = request.getParameter("bookName");
+        model.addAttribute("book", bookName);
         return "bookShelf";
     }
 
