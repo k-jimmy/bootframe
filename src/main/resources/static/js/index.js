@@ -18,7 +18,7 @@ function Index() {
         var category = "novels";
         var value = $(".container .form-control").val();
         base.search(category, value);
-    })
+    });
 
     //切换搜索类型
     $(".nav-pills li").click(function () {

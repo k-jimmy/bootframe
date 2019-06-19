@@ -17,24 +17,30 @@ public class BookController {
     @Resource
     private BookService bookService;
 
-    @RequestMapping("/")
-    public String index(HttpServletRequest request, Model model) {
-        String bookName = request.getParameter("bookName");
-        model.addAttribute("book", bookName);
-        return "default";
-    }
-    @RequestMapping("/bookShelf")
-    public String bookShelf(HttpServletRequest request, Model model) {
-        String bookName = request.getParameter("bookName");
-        model.addAttribute("book", bookName);
-        return "bookShelf";
-    }
+//    @RequestMapping("/")
+//    public String index(HttpServletRequest request, Model model) {
+//        String bookName = request.getParameter("bookName");
+//        model.addAttribute("book", bookName);
+//        return "default";
+//    }
+//    @RequestMapping("/bookShelf")
+//    public String bookShelf(HttpServletRequest request, Model model) {
+//        String bookName = request.getParameter("bookName");
+//        model.addAttribute("book", bookName);
+//        return "bookShelf";
+//    }
+//    @RequestMapping("/search")
+//    public String search(HttpServletRequest request, Model model) {
+//        String bookName = request.getParameter("bookName");
+//        model.addAttribute("book", bookName);
+//        return "search";
+//    }
 
-    @ResponseBody
-    @RequestMapping("/searchBook")
-    public JSONObject searchBook(String url) {
-        return bookService.searchBook(url, "");
-    }
+//    @ResponseBody
+//    @RequestMapping("/searchBook")
+//    public JSONObject searchBook(String url) {
+//        return bookService.searchBook(url, "");
+//    }
 
     @ResponseBody
     @RequestMapping(value="/getContent",method = {RequestMethod.POST})

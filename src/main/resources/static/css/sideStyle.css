@@ -7,11 +7,11 @@ body {
     position: relative;
     overflow-x: hidden;
 }
-body,
-html {
-    height: 100%;
-    background-color: #eeeeee;
-}
+/*body,*/
+/*html {*/
+    /*height: 100%;*/
+    /*background-color: #eeeeee;*/
+/*}*/
 
 .nav .open > a {
     background-color: transparent;
@@ -290,10 +290,10 @@ html {
     z-index: 1;
 }
 /* SOME DEMO STYLES - NOT REQUIRED */
-body,
-html {
-    background-color: #eeeeee;
-}
+/*body,*/
+/*html {*/
+    /*background-color: #eeeeee;*/
+/*}*/
 body h1,
 body h2,
 body h3,

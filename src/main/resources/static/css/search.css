@@ -1,0 +1,32 @@
+.search {
+    background-color: #FFFFFF;
+    padding-top: 5px;
+}
+.search-callback {
+    top: 5px;
+}
+
+.search #searchList {
+    border-bottom: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
+}
+
+.search #searchList > div {
+    margin: 10px auto 10px;
+}
+
+.search #searchList img {
+    width: 50px;
+    height: 60px;
+}
+
+.search #searchList #searchListName, .search #searchList .star {
+    margin-left: -15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.search #searchList .star {
+    color: #BBBBBB;
+    font-size: 0.8em;
+}

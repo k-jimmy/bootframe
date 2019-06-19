@@ -6,7 +6,7 @@ function BookShelf() {
     //绑定侧边栏的选项事件
     $("#wrapper li").click(function () {
         var cla = $(this).attr("class");
-        eval("base." + cla + "("+cla+")");
+        eval("base." + cla + "('" + cla + "')");
     });
 
     //加载侧边栏,绑定侧边栏打开关闭事件
@@ -45,7 +45,8 @@ BookShelf.prototype = {
         console.log(name);
     },
     search: function (name) {
-
+        this.loadHtml(name);
+        $(".tittle").hide();
     },
     signal: function (name) {
 
@@ -58,6 +59,7 @@ BookShelf.prototype = {
     },
     loadHtml: function (html) {
         $(".container .loadContent").load(html);
+        $('[data-toggle="offcanvas"]').click();
     }
 };
 $(function () {
