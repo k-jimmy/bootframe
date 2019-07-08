@@ -24,7 +24,7 @@ public class SearchController {
 
     @ResponseBody
     @RequestMapping("/searchBook")
-    public JSONObject searchBook(String url) {
+    public String searchBook(String url) {
         return bookService.searchBook(url, "");
     }
 }

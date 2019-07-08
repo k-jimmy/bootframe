@@ -2,26 +2,38 @@ function Search() {
     var base = this;
     //绑定搜索事件
     $(".search .search-search").click(function () {
-        var category = "novels";
         var value = $(".search .search-val").val();
-        base.search(category, value);
+        base.search(value);
     });
+    $(".search .search-callback").click(function () {
+        $("#wrapper .bookShelf").click();
+    });
+    $(".search #searchList").on("click"," .row",function () {
+        var novel_img = $(this).find("img").attr("src");
+        var novel_name = $(this).find(".bookName span").text();
+        var novel_author = $(this).find(".bookAuthor span").text();
+
+    })
+
 }
 
 Search.prototype = {
-    search: function (category, value) {
+    searchNovelDetail: function (novel_img,novel_name,novel_author) {
         var data = {};
-        data.url = "http://localhost:8080/v1/" + category + "/" + value + "/10";
+    },
+    search: function (value) {
+        var data = {};
+        data.url = "http://localhost:8082/novelName?novelName=" +value;
         $.get("/searchBook", data, function (r) {
-            if (r.info) {
-                $("#search-content #searchList div").empty();
-                Object.keys(r.info).forEach(function (key) {
-                    var book = r.info[key];
-                    console.log(book);
+                console.log(r);
+            if (r) {
+                $("#search-content #searchList").empty();
+                Object.keys(r).forEach(function (key) {
+                    var book = r[key];
                     if (book) {
-                        var b = "<div class=\"col-xs-2 col-md-2\">\n" +
-                            "        <img src=\"" + book.novel_cover + "\"\n" +
-                            "             alt=\"通用的占位符缩略图\">\n" +
+                        var b = "<div class='row'><div class=\"col-xs-2 col-md-2\">\n" +
+                            "        <img src=\"" + book.novel_img + "\"\n" +
+                            "             onerror=\"this.src='image/none-book.jpg'\">\n" +
                             "    </div>\n" +
                             "    <div class=\"col-xs-10 col-md-10 content\">\n" +
                             "        <div class=\"col-xs-12 col-md-12 bookName\">\n" +
@@ -31,28 +43,9 @@ Search.prototype = {
                             "            <span>"+ book.novel_author +"</span>\n" +
                             "        </div>\n" +
                             "        <div class=\"col-xs-12 col-md-12 star\">\n" +
-                            "            <span\>" + book.novel_abstract + "\"</span>\n" +
+                            "            <span\>" + book.novel_intro + "\"</span>\n" +
                             "        </div>\n" +
-                            "    </div>";
-                        // var a = "<div class=\"row\">\n" +
-                        //     "<div class=\"col-xs-2 col-md-2\">\n" +
-                        //     "                    <div class=\"thumbnail\">\n" +
-                        //     "                        <img src=\"" + book.novel_cover + "\"\n" +
-                        //     "                             alt=\"通用的占位符缩略图\">\n" +
-                        //     "                    </div>\n" +
-                        //     "                </div>\n" +
-                        //     "                <div class=\"col-xs-10 col-md-10\">\n" +
-                        //     "                    <div class=\"thumbnail\">\n" +
-                        //     "                        <div class=\"caption\">\n" +
-                        //     "                            <a href='/getCatalog?url=" + book.novel_url + "'><h4 class=\"text-primary\" >" + book.novel_name + "</h4></a>" +
-                        //     "                               <span><small> " + book.novel_author + "</small></span>" +
-                        //     "                               <span><small> " + book.novel_type + "</small></span>" +
-                        //     "                             <a href='/getContent?url=" + book.novel_latest_chapter_url + "'>  <span class=\"text-primary\"><small>最新章节：" + book.novel_latest_chapter_name + "</small></span></a>\n" +
-                        //     "                            <p><small>引言：" + book.novel_abstract + "</small></p>\n" +
-                        //     "                        </div>\n" +
-                        //     "                    </div>\n" +
-                        //     "                </div>\n" +
-                        //     "                </div>";
+                            "    </div></div>";
                         $("#search-content #searchList").append(b);
                     }
                 });
@@ -62,7 +55,7 @@ Search.prototype = {
                 console.log(cla);
                 $(".search .btn-primary").click();
             }
-        });
+        },"json");
     }
 };
 $(function () {

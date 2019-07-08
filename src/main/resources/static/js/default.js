@@ -19,6 +19,7 @@ function BookShelf() {
     });
 
     $('[data-toggle="offcanvas"]').click(function () {
+        console.log("----");
         $('#wrapper').toggleClass('toggled');
     });
 }
@@ -39,10 +40,12 @@ BookShelf.prototype = {
         return isClosed;
     },
     user: function (name) {
-        console.log(name);
+        this.loadHtml(name);
+        $(".tittle").show();
     },
     bookShelf: function (name) {
-        console.log(name);
+        this.loadHtml(name);
+        $(".tittle").show();
     },
     search: function (name) {
         this.loadHtml(name);

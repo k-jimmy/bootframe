@@ -26,8 +26,8 @@ public class BookServiceImpl implements BookService {
 
     //搜索书本
     @Override
-    public JSONObject searchBook(String url, String attr) {
-        return JSONObject.parseObject(getHttpContent(url));
+    public String searchBook(String url, String attr) {
+        return getHttpContent(url);
     }
 
     //获得目录
@@ -80,19 +80,19 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     private String getHttpContent(String url) {
-        //1.获得一个httpclient对象
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        //2.生成一个get请求
-        System.out.println(url);
-        HttpGet httpget = new HttpGet(url);
-        httpget.setHeader(HEADER_NAME, HEADER_VALUE);
-        CloseableHttpResponse response = null;
-        try {
-            //3.执行get请求并返回结果
-            response = httpclient.execute(httpget);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+//        //1.获得一个httpclient对象
+//        CloseableHttpClient httpclient = HttpClients.createDefault();
+//        //2.生成一个get请求
+//        System.out.println(url);
+//        HttpGet httpget = new HttpGet(url);
+//        httpget.setHeader(HEADER_NAME, HEADER_VALUE);
+        CloseableHttpResponse response = sendHttp(url);
+//        try {
+//            //3.执行get请求并返回结果
+//            response = httpclient.execute(httpget);
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
         String result = null;
         try {
             //4.处理结果，这里将结果返回为字符串
@@ -109,6 +109,31 @@ public class BookServiceImpl implements BookService {
                 e.printStackTrace();
             }
         }
+        System.out.println(result);
         return result;
+    }
+
+
+    private String getHttpImage(String url) {
+        CloseableHttpResponse response = sendHttp(url);
+
+        return null;
+    }
+
+    private CloseableHttpResponse sendHttp(String url) {
+        //1.获得一个httpclient对象
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        //2.生成一个get请求
+        System.out.println(url);
+        HttpGet httpget = new HttpGet(url);
+        httpget.setHeader(HEADER_NAME, HEADER_VALUE);
+        CloseableHttpResponse response = null;
+        try {
+            //3.执行get请求并返回结果
+            response = httpclient.execute(httpget);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return response;
     }
 }
